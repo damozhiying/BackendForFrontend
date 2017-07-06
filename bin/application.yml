@@ -1,0 +1,30 @@
+security:
+  ignored: /v2/api-docs,/configuration/ui,/swagger-resources,/swagger-resources/**,/configuration/security,/swagger-ui.html,/webjars/**,/public/**,/management/**,/env/**
+  oauth2:
+      resource:
+          userInfoUri: http://localhost:8080/auth/realms/TDC/protocol/openid-connect/userinfo
+          preferTokenInfo: false
+      client:
+          clientId: tdc-client
+          clientSecret: 43796a57-1866-4842-8ef3-972c0276ea99
+          accessTokenUri: http://localhost:8080/auth/realms/TDC/protocol/openid-connect/token
+          userAuthorizationUri: http://localhost:8080/auth/realms/TDC/protocol/openid-connect/auth
+          clientAuthenticationScheme: form
+
+keycloak:
+    logout:
+        endpoint: http://localhost:8080/auth/realms/TDC/protocol/openid-connect/logout
+        redirect: http://localhost:8082
+
+server: 
+    use-forward-headers: true
+    port: 8082
+hystrix: 
+  shareSecurityContext: true
+feign: 
+ hystrix:
+  enabled: true
+
+service:
+    properties:
+        url: http://localhost:8083/properties
